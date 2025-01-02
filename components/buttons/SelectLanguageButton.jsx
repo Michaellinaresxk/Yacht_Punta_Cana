@@ -1,56 +1,129 @@
-import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import { Box, FormControl, MenuItem, Select } from '@mui/material';
+import { useRouter } from 'next/router';
+import { Language as LanguageIcon } from '@mui/icons-material';
+import { Colors } from '../../styles/theme/index';
 
-export const SelectLanguageButton = () => {
-	const router = useRouter();
+const languageNames = {
+  es: 'Español',
+  en: 'English',
+};
 
-	const { locales, locale, push, pathname } = useRouter();
+const languageFlags = {
+  es: '🇪🇸',
+  en: '🇬🇧',
+};
 
-	const [language, setLanguage] = useState("");
+export const SelectLanguageButton = ({ isMobile = false }) => {
+  const router = useRouter();
+  const { pathname, locale } = router;
+  const [language, setLanguage] = useState(locale || '');
 
-	useEffect(() => {}, [locales]);
+  const handleClick = (l) => () => {
+    setLanguage(l);
+    router.push(pathname, undefined, { locale: l });
+  };
 
-	const handleClick = (l) => () => {
-		push(`/${pathname}`, undefined, { locale: l });
-	};
-	const handleLanguageChange = (e) => {
-		setLanguage(e.target.value);
-	};
+  useEffect(() => {
+    if (locale) {
+      setLanguage(locale);
+    }
+  }, [locale]);
 
-	return (
-		<>
-			<Box
-				sx={{
-					display: { xs: "none", sm: "block" },
-					width: { sm: "50px", md: "80px" },
-					height: "50px",
-				}}
-			>
-				<FormControl fullWidth>
-					<InputLabel id="demo-simple-select-label">Ln</InputLabel>
-					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
-						value={language}
-						label="Idioma"
-						onChange={handleLanguageChange}
-					>
-						{/* <MenuItem value={idioms[0]}>Esp</MenuItem>
-						<MenuItem value={idioms[1]}>Ing</MenuItem> */}
-
-						{router.locales.map((l) => (
-							<MenuItem key={l} value={l} onClick={handleClick(l)}>
-								{l}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</Box>
-		</>
-	);
+  return (
+    <FormControl
+      variant='outlined'
+      size={isMobile ? 'medium' : 'small'}
+      fullWidth={isMobile}
+      sx={{
+        minWidth: isMobile ? '100%' : 120,
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '12px',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          transition: 'all 0.3s ease',
+          '& fieldset': {
+            borderColor: isMobile ? Colors.first_blue : 'rgba(0,0,0,0.08)',
+          },
+          '&:hover fieldset': {
+            borderColor: Colors.first_blue,
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: Colors.first_blue,
+          },
+        },
+      }}
+    >
+      <Select
+        value={language}
+        displayEmpty
+        renderValue={(value) => (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              pl: isMobile ? 1 : 0,
+            }}
+          >
+            {value ? (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <span>{languageFlags[value]}</span>
+                <span
+                  style={{
+                    fontSize: isMobile ? '1rem' : '0.9rem',
+                    color: Colors.title,
+                  }}
+                >
+                  {languageNames[value]}
+                </span>
+              </Box>
+            ) : (
+              'Select'
+            )}
+          </Box>
+        )}
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              mt: 1,
+              borderRadius: '12px',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              '& .MuiMenuItem-root': {
+                padding: 2,
+                '&:hover': {
+                  backgroundColor: `${Colors.first_blue}15`,
+                },
+              },
+            },
+          },
+        }}
+      >
+        {router.locales.map((l) => (
+          <MenuItem
+            key={l}
+            value={l}
+            onClick={handleClick(l)}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              borderRadius: '8px',
+              mx: 1,
+              my: 0.5,
+            }}
+          >
+            <span>{languageFlags[l]}</span>
+            <span
+              style={{
+                fontSize: isMobile ? '1rem' : '0.9rem',
+                color: Colors.title,
+              }}
+            >
+              {languageNames[l]}
+            </span>
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
 };

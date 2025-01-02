@@ -1,179 +1,155 @@
-import { Box, Typography } from "@mui/material";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import SportsBarIcon from "@mui/icons-material/SportsBar";
-import SupportIcon from "@mui/icons-material/Support";
-import AnchorIcon from "@mui/icons-material/Anchor";
-import RestaurantIcon from "@mui/icons-material/Restaurant";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
-import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
-import LocalDrinkIcon from "@mui/icons-material/LocalDrink";
-import LiquorIcon from "@mui/icons-material/Liquor";
-import { useTranslation } from "next-i18next";
-import { Colors } from "../styles/theme";
+import { Box, Typography, Container, Paper } from '@mui/material';
+import {
+  LocalGasStation,
+  SportsBar,
+  Support,
+  Anchor,
+  Restaurant,
+  DirectionsCar,
+  BeachAccess,
+  HomeRepairService,
+  LocalDrink,
+  Liquor,
+} from '@mui/icons-material';
+import { useTranslation } from 'next-i18next';
+import { motion } from 'framer-motion';
+import { Colors } from '../styles/theme';
+
+const services = [
+  { icon: LocalGasStation, key: 'included-serv.fuel' },
+  { icon: Support, key: 'included-serv.lifeSavin' },
+  { icon: SportsBar, key: 'included-serv.beer' },
+  { icon: Anchor, key: 'included-serv.captain' },
+  { icon: Restaurant, key: 'included-serv.menu' },
+  { icon: DirectionsCar, key: 'included-serv.transport' },
+  { icon: Liquor, key: 'included-serv.water' },
+  { icon: BeachAccess, key: 'included-serv.access' },
+  { icon: HomeRepairService, key: 'included-serv.snorkeling' },
+  { icon: LocalDrink, key: 'included-serv.softDrinl' },
+];
+
+const ServiceItem = ({ Icon, text }) => {
+  return (
+    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+      <Paper
+        elevation={0}
+        sx={{
+          p: 2,
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '16px',
+          backgroundColor: 'rgba(255,255,255,0.8)',
+          backdropFilter: 'blur(8px)',
+          transition: 'all 0.3s ease',
+          border: '1px solid rgba(0,0,0,0.08)',
+          '&:hover': {
+            backgroundColor: 'rgba(255,255,255,0.95)',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.1)',
+            transform: 'translateY(-2px)',
+          },
+        }}
+      >
+        <Icon
+          sx={{
+            width: 35,
+            height: 35,
+            color: Colors.second_blue,
+            p: 0.5,
+            borderRadius: '12px',
+            backgroundColor: `${Colors.second_blue}15`,
+          }}
+        />
+        <Typography
+          variant='body1'
+          sx={{
+            ml: 2,
+            fontWeight: 500,
+            color: 'text.primary',
+          }}
+        >
+          {text}
+        </Typography>
+      </Paper>
+    </motion.div>
+  );
+};
 
 export const BoatServices = () => {
-	const { t } = useTranslation();
-	return (
-		<>
-			<Box
-				sx={{
-					width: "90%",
-					marginLeft: "auto",
-					marginRight: "auto",
-					marginTop: "70px",
-				}}
-			>
-				<Typography variant="h4">{t("included-serv.included")}:</Typography>
-			</Box>
-			<Box
-				sx={{
-					display: "flex",
-					flexDirection: { xs: "column", sm: "row" },
-					justifyContent: "space-between",
-					marginTop: "30px",
-					width: "auto",
-					maxWidth: "90%",
-					marginTop: "30px",
-					marginBottom: "70px",
-					marginLeft: "auto",
-					marginRight: "auto",
-				}}
-			>
-				<Box sx={{ display: "flex", flexDirection: "column" }}>
-					<Box display="flex">
-						<LocalGasStationIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.fuel")}
-						</Typography>
-					</Box>
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<SupportIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.lifeSavin")}
-						</Typography>
-					</Box>
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<SportsBarIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.beer")}
-						</Typography>
-					</Box>
-				</Box>
+  const { t } = useTranslation();
 
-				<Box sx={{ display: "flex", flexDirection: "column" }}>
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<AnchorIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.captain")}
-						</Typography>
-					</Box>
+  return (
+    <Container maxWidth='lg' sx={{ py: 8 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Typography
+          variant='h4'
+          sx={{
+            mb: 4,
+            fontWeight: 600,
+            textAlign: { xs: 'center', md: 'left' },
+            background: `linear-gradient(45deg, ${Colors.second_blue}, ${Colors.first_blue})`,
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          {t('included-serv.included')}
+        </Typography>
 
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<RestaurantIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.menu")}
-						</Typography>
-					</Box>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(4, 1fr)',
+            },
+            gap: 3,
+            position: 'relative',
+          }}
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={service.key}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <ServiceItem Icon={service.icon} text={t(service.key)} />
+            </motion.div>
+          ))}
 
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<DirectionsCarIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.transport")}
-						</Typography>
-					</Box>
-				</Box>
-				<Box sx={{ display: "flex", flexDirection: "column" }}>
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<LiquorIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.water")}
-						</Typography>
-					</Box>
-
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<BeachAccessIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1">
-							{t("included-serv.access")}
-						</Typography>
-					</Box>
-				</Box>
-				<Box sx={{ display: "flex", flexDirection: "column" }}>
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<HomeRepairServiceIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.snorkeling")}
-						</Typography>
-					</Box>
-
-					<Box display="flex" sx={{ marginTop: { xs: "10px" } }}>
-						<LocalDrinkIcon
-							sx={{
-								width: "30px",
-								height: "30px",
-								color: Colors.second_blue,
-							}}
-						/>
-						<Typography variant="subtitle1" ml={1}>
-							{t("included-serv.softDrinl")}
-						</Typography>
-					</Box>
-				</Box>
-			</Box>
-		</>
-	);
+          {/* Decorative elements */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: -50,
+              right: -50,
+              width: 200,
+              height: 200,
+              background: `radial-gradient(circle, ${Colors.second_blue}15 0%, transparent 70%)`,
+              borderRadius: '50%',
+              zIndex: -1,
+            }}
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: -50,
+              left: -50,
+              width: 200,
+              height: 200,
+              background: `radial-gradient(circle, ${Colors.first_blue}15 0%, transparent 70%)`,
+              borderRadius: '50%',
+              zIndex: -1,
+            }}
+          />
+        </Box>
+      </motion.div>
+    </Container>
+  );
 };

@@ -1,300 +1,171 @@
-import { Paper, Box, Typography, Button } from "@mui/material";
-import { Colors } from "../../styles/theme";
-import { motion } from "framer-motion";
-import { useTranslation } from "next-i18next";
+import { Paper, Box, Typography, Button, Container } from '@mui/material';
+import { Colors } from '../../styles/theme';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const image1 =
-	"https://res.cloudinary.com/michaelxk-com/image/upload/v1624139571/servicios/yates1_2_wbiap8.jpg";
-
-const image2 =
-	"https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1672758964/9-2_qqkusx.jpg";
-
-const image3 =
-	"https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1672758977/transporte_zrihn3.webp";
-
-const imageArray = [
-	{
-		id: 1,
-		image:
-			"https://res.cloudinary.com/michaelxk-com/image/upload/v1624139571/servicios/yates1_2_wbiap8.jpg",
-		title: "Yacht Charter",
-		description:
-			"At Punta Cana Yacht Rentals we make everything possible, organizing private luxury yacht charters under customer specifications and providing the best personalized service to cover all the needs of your event.",
-		action: "Book now",
-	},
-	{
-		id: 2,
-		image:
-			"https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1672758964/9-2_qqkusx.jpg",
-		title: "Catering Services",
-		description:
-			"We work with the best catering companies for private events in the Republic Dominican. Tell us what event you want to celebrate and our team will contact you to listen to you and offer you personalized proposals tailored to your needs.",
-		action: "More info",
-	},
-
-	{
-		id: 3,
-		image:
-			"https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1672758977/transporte_zrihn3.webp",
-		title: "Private Transport",
-		description:
-			"For us as a company the most important thing is the safety and comfort of our clients, for this reason we offer you private transportation. We pick you up at your hotel or villa and take you directly to the Marina, to board your yacht, sail to your destination and live an unforgettable experience.",
-		action: "More info",
-	},
+const services = [
+  {
+    id: 1,
+    image:
+      'https://res.cloudinary.com/michaelxk-com/image/upload/v1624139571/servicios/yates1_2_wbiap8.jpg',
+    titleKey: 'services-card.boat',
+    descriptionKey: 'services-card.p1',
+    actionKey: 'services-card.book',
+  },
+  {
+    id: 2,
+    image:
+      'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1672758964/9-2_qqkusx.jpg',
+    titleKey: 'services-card.catering',
+    descriptionKey: 'services-card.p2',
+    actionKey: 'services-card.more-info',
+  },
+  {
+    id: 3,
+    image:
+      'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1672758977/transporte_zrihn3.webp',
+    titleKey: 'services-card.transport',
+    descriptionKey: 'services-card.p3',
+    actionKey: 'services-card.more-info',
+  },
 ];
 
+const ServiceCard = ({ image, titleKey, descriptionKey, actionKey, index }) => {
+  const { t } = useTranslation();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
+    >
+      <Paper
+        elevation={0}
+        sx={{
+          borderRadius: '24px',
+          overflow: 'hidden',
+          backgroundColor: 'white',
+          transition: 'all 0.3s ease-in-out',
+          border: '1px solid rgba(0,0,0,0.08)',
+          '&:hover': {
+            boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
+            transform: 'translateY(-8px)',
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+          }}
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              width: { xs: '100%', md: '450px' },
+              height: { xs: '300px', md: '400px' },
+              overflow: 'hidden',
+            }}
+          >
+            <Box
+              component='img'
+              src={image}
+              alt={t(titleKey)}
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                transition: 'transform 0.5s ease',
+                '&:hover': {
+                  transform: 'scale(1.1)',
+                },
+              }}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              flex: 1,
+              p: { xs: 3, md: 5 },
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography
+              variant='h4'
+              sx={{
+                color: Colors.first_blue,
+                fontWeight: 600,
+                mb: 3,
+                fontSize: { xs: '1.5rem', md: '2rem' },
+              }}
+            >
+              {t(titleKey)}
+            </Typography>
+
+            <Typography
+              sx={{
+                color: 'text.secondary',
+                lineHeight: 1.8,
+                mb: 4,
+                fontSize: { xs: '0.9rem', md: '1rem' },
+              }}
+            >
+              {t(descriptionKey)}
+            </Typography>
+
+            <Button
+              variant='contained'
+              endIcon={<ArrowForwardIcon />}
+              sx={{
+                bgcolor: Colors.first_blue,
+                py: 1.5,
+                px: 4,
+                borderRadius: '12px',
+                alignSelf: 'flex-start',
+                textTransform: 'none',
+                fontSize: '1rem',
+                fontWeight: 500,
+                boxShadow: `0 8px 20px ${Colors.first_blue}40`,
+                '&:hover': {
+                  bgcolor: Colors.second_blue,
+                  transform: 'translateY(-2px)',
+                  boxShadow: `0 12px 24px ${Colors.first_blue}60`,
+                },
+              }}
+            >
+              {t(actionKey)}
+            </Button>
+          </Box>
+        </Box>
+      </Paper>
+    </motion.div>
+  );
+};
+
 export const ServicesCard = () => {
-	const { t } = useTranslation();
-	return (
-		<>
-			<Box>
-				<motion.div
-					className="animatable"
-					whileHover={{
-						scale: 1.05,
-						transition: { duration: 0.3 },
-					}}
-					whileTap={{ scale: 0.9 }}
-				>
-					<Paper
-						elevation={2}
-						sx={{
-							marginTop: "100px",
-							width: { xs: "72.5%", sm: "80%", md: "85%" },
-							height: { xs: "550px", sm: "500px", md: "auto" },
-							marginRight: "auto",
-							marginLeft: "auto",
-						}}
-					>
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: { xs: "column", md: "row" },
-								marginTop: "30px",
-							}}
-						>
-							<Box
-								sx={{
-									display: "inline-block",
-									width: "350px",
-									height: "250px",
-								}}
-							>
-								<img
-									src={image1}
-									alt=""
-									style={{
-										width: "350px",
-										height: "250px",
-									}}
-								/>
-								{/* <BannerImage src={image.image} /> */}
-							</Box>
-							<Box>
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignContent: "center",
-										width: "90%",
-										marginLeft: "auto",
-										marginRight: "auto",
-									}}
-								>
-									<Typography
-										mt={2}
-										variant="subtitle1"
-										color={Colors.first_blue}
-									>
-										{t("services-card.boat")}
-									</Typography>
-									<Typography
-										mt={1}
-										sx={{ textAlign: "justify", padding: "3px" }}
-									>
-										{t("services-card.p1")}
-									</Typography>
-									<Button
-										variant="contained"
-										sx={{
-											backgroundColor: Colors.first_blue,
-											marginTop: "15px",
-											width: { xs: "auto", md: "40%" },
-										}}
-									>
-										<Typography>{t("services-card.book")}</Typography>
-									</Button>
-								</Box>
-							</Box>
-						</Box>
-					</Paper>
-				</motion.div>
-				<motion.div
-					className="animatable"
-					whileHover={{
-						scale: 1.05,
-						transition: { duration: 0.3 },
-					}}
-					whileTap={{ scale: 0.9 }}
-				>
-					<Paper
-						elevation={2}
-						sx={{
-							marginTop: "100px",
-							width: { xs: "72.5%", sm: "80%", md: "85%" },
-							height: { xs: "550px", sm: "500px", md: "auto" },
-							marginRight: "auto",
-							marginLeft: "auto",
-						}}
-					>
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: { xs: "column", md: "row" },
-								marginTop: "30px",
-							}}
-						>
-							<Box
-								sx={{
-									display: "inline-block",
-									width: "350px",
-									height: "250px",
-								}}
-							>
-								<img
-									src={image2}
-									alt=""
-									style={{
-										width: "350px",
-										height: "250px",
-									}}
-								/>
-								{/* <BannerImage src={image.image} /> */}
-							</Box>
-							<Box>
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignContent: "center",
-										width: "90%",
-										marginLeft: "auto",
-										marginRight: "auto",
-									}}
-								>
-									<Typography
-										mt={2}
-										variant="subtitle1"
-										color={Colors.first_blue}
-									>
-										{t("services-card.catering")}
-									</Typography>
-									<Typography
-										mt={1}
-										sx={{ textAlign: "justify", padding: "3px" }}
-									>
-										{t("services-card.p2")}
-									</Typography>
-									<Button
-										variant="contained"
-										sx={{
-											backgroundColor: Colors.first_blue,
-											marginTop: "15px",
-											width: { xs: "auto", md: "40%" },
-										}}
-									>
-										<Typography>{t("services-card.more-info")}</Typography>
-									</Button>
-								</Box>
-							</Box>
-						</Box>
-					</Paper>
-				</motion.div>
-				<motion.div
-					className="animatable"
-					whileHover={{
-						scale: 1.05,
-						transition: { duration: 0.3 },
-					}}
-					whileTap={{ scale: 0.9 }}
-				>
-					<Paper
-						elevation={2}
-						sx={{
-							marginTop: "100px",
-							width: { xs: "72.5%", sm: "80%", md: "85%" },
-							height: { xs: "550px", sm: "500px", md: "auto" },
-							marginRight: "auto",
-							marginLeft: "auto",
-						}}
-					>
-						<Box
-							sx={{
-								display: "flex",
-								flexDirection: { xs: "column", md: "row" },
-								marginTop: "30px",
-							}}
-						>
-							<Box
-								sx={{
-									display: "inline-block",
-									width: "350px",
-									height: "250px",
-								}}
-							>
-								<img
-									src={image3}
-									alt=""
-									style={{
-										width: "350px",
-										height: "250px",
-									}}
-								/>
-							</Box>
-							<Box>
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignContent: "center",
-										width: "90%",
-										marginLeft: "auto",
-										marginRight: "auto",
-									}}
-								>
-									<Typography
-										mt={2}
-										variant="subtitle1"
-										color={Colors.first_blue}
-									>
-										{t("services-card.transport")}
-									</Typography>
-									<Typography
-										mt={1}
-										sx={{ textAlign: "justify", padding: "3px" }}
-									>
-										{t("services-card.p3")}
-									</Typography>
-									<Button
-										variant="contained"
-										sx={{
-											backgroundColor: Colors.first_blue,
-											marginTop: "15px",
-											width: { xs: "auto", md: "40%" },
-										}}
-									>
-										<Typography>{t("services-card.more-info")}</Typography>
-									</Button>
-								</Box>
-							</Box>
-						</Box>
-					</Paper>
-				</motion.div>
-			</Box>
-			;
-		</>
-	);
+  return (
+    <Container maxWidth='xl' sx={{ py: 8 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+        }}
+      >
+        {services.map((service, index) => (
+          <ServiceCard
+            key={service.id}
+            image={service.image}
+            titleKey={service.titleKey}
+            descriptionKey={service.descriptionKey}
+            actionKey={service.actionKey}
+            index={index}
+          />
+        ))}
+      </Box>
+    </Container>
+  );
 };

@@ -1,48 +1,49 @@
-import { ServicesHero } from "../components/hero/ServicesHero";
-import { Footer } from "../components/Footer";
-import { BookNowButton } from "../components/buttons/BookNowButton";
-import { OurServicesLogo } from "../components/OurServicesLogo";
-import { ServicesCard } from "../components/cards/ServicesCard";
-import { DestinationsContainer } from "../components/DestinationsContainer";
-import { boats } from "../database/boat_data";
-import { BoatsComponent } from "../components/BoatsComponent";
-import { MainTitleBoatServices } from "../components/MainTitleBoatServices";
-import { SupportBanner } from "../components/SupportBanner";
-import { FixedComponent } from "../components/FixedComponent";
-import { FixedComponentImage } from "../components/FixedComponentImage";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { ServicesHero } from '../components/hero/ServicesHero';
+import { Footer } from '../components/Footer';
+import { BookNowButton } from '../components/buttons/BookNowButton';
+import { OurServicesLogo } from '../components/OurServicesLogo';
+import { ServicesCard } from '../components/cards/ServicesCard';
+import { DestinationsContainer } from '../components/DestinationsContainer';
+import { boats } from '../database/boat_data';
+import { BoatsComponent } from '../components/BoatsComponent';
+import { MainTitleBoatServices } from '../components/MainTitleBoatServices';
+import { SupportBanner } from '../components/SupportBanner';
+import { FixedComponentImage } from '../components/FixedComponentImage';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { BoatServices } from '../components/BoatServices';
 const image1 =
-	"https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124936/DJI_0355_ze3vtu.jpg";
+  'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124936/DJI_0355_ze3vtu.jpg';
 
 const image2 =
-	"https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124942/opcion2_mfwnti.jpg";
+  'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124942/opcion2_mfwnti.jpg';
 
 function Services({ boat_list }) {
-	return (
-		<>
-			{/* <DrawerAppBar /> */}
-			<ServicesHero />
-			<OurServicesLogo />
-			<ServicesCard />
-			<FixedComponentImage image={image1} />
-			<MainTitleBoatServices />
-			<BoatsComponent data={boat_list} />
-			<BookNowButton />
-			<SupportBanner />
-			<FixedComponentImage image={image2} />
-			<DestinationsContainer />
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      {/* <DrawerAppBar /> */}
+      <ServicesHero />
+      <OurServicesLogo />
+      <ServicesCard />
+      <BoatServices />
+      <SupportBanner />
+      <FixedComponentImage image={image1} />
+      <MainTitleBoatServices />
+      <BoatsComponent data={boat_list} />
+      <BookNowButton />
+      <FixedComponentImage image={image2} />
+      <DestinationsContainer />
+      <Footer />
+    </>
+  );
 }
 
 export default Services;
 
 export async function getStaticProps({ locale }) {
-	return {
-		props: {
-			boat_list: boats,
-			...(await serverSideTranslations(locale, ["common"])),
-		},
-	};
+  return {
+    props: {
+      boat_list: boats,
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }

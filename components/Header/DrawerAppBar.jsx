@@ -1,348 +1,191 @@
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
+// DrawerAppBar.jsx
+import PropTypes from 'prop-types';
 import {
-	House,
-	Language,
-	RoomService,
-	Navigation,
-	PhoneCallback,
-} from "@mui/icons-material";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import { Colors } from "../../styles/theme";
-import { SelectLanguageButton } from "../buttons/SelectLanguageButton";
-import "@fontsource/roboto";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { useTranslation } from "next-i18next";
-import { motion } from "framer-motion";
-import yatch_logo from "../../assets/icons/logo-colorfull-1.png";
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Button,
+  Container,
+} from '@mui/material';
+import {
+  House,
+  Language,
+  RoomService,
+  Navigation,
+  PhoneCallback,
+  Menu as MenuIcon,
+} from '@mui/icons-material';
+import { Colors } from '../../styles/theme';
+import { SelectLanguageButton } from '../buttons/SelectLanguageButton';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { motion } from 'framer-motion';
+import yatch_logo from '../../assets/icons/logo-colorfull-1.png';
 
-const drawerWidth = 240;
+const DrawerAppBar = ({ window }) => {
+  const { t } = useTranslation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-function DrawerAppBar(props) {
-	const { t } = useTranslation();
-	const { window } = props;
-	const [mobileOpen, setMobileOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
-	const handleDrawerToggle = () => {
-		setMobileOpen(!mobileOpen);
-	};
+  const navItems = [
+    { label: 'navbar.home', href: '/', icon: House },
+    { label: 'navbar.services', href: '/services', icon: RoomService },
+    { label: 'navbar.destinations', href: '/destiny', icon: Navigation },
+    { label: 'navbar.contact', href: '/contact_us', icon: PhoneCallback },
+  ];
 
-	const drawer = (
-		<Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-			<Link href="/">
-				<Image
-					src={yatch_logo}
-					alt="logo image"
-					style={{
-						alignItems: "center",
-						// width: "100px",
-						// height: "40px",
-						margin: "10px",
-					}}
-					width={170}
-					height={50}
-				/>
-			</Link>
-			<Divider sx={{ backgroundColor: Colors.first_blue }} />
-			<List
-				sx={{
-					fontFamily: "Roboto",
-					fontWeight: "300",
-					fontSize: "22px",
-				}}
-			>
-				<ListItem
-					disablePadding
-					sx={{ ":hover": { backgroundColor: "rgba(0, 0, 0, 0.1)" } }}
-				>
-					<Link href="/">
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<House sx={{ marginLeft: "15px", color: Colors.first_blue }} />
-							<ListItemButton
-								sx={{
-									textAlign: "left",
-								}}
-							>
-								<ListItemText primary={t("navbar.home")} />
-							</ListItemButton>
-						</Box>
-					</Link>
-				</ListItem>
+  const DrawerContent = (
+    <Box>
+      <Box sx={{ p: 2, textAlign: 'center' }}>
+        <Link href='/'>
+          <Image
+            src={yatch_logo}
+            alt='logo image'
+            width={170}
+            height={50}
+            style={{ margin: '10px' }}
+          />
+        </Link>
+      </Box>
+      <Divider sx={{ backgroundColor: Colors.first_blue }} />
 
-				<ListItem
-					disablePadding
-					sx={{ ":hover": { backgroundColor: "rgba(0, 0, 0, 0.1)" } }}
-				>
-					<Link href="/services">
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<RoomService
-								sx={{ color: Colors.first_blue, marginLeft: "15px" }}
-							/>
-							<ListItemButton
-								sx={{
-									textAlign: "left",
-								}}
-							>
-								<ListItemText primary={t("navbar.services")} />
-							</ListItemButton>
-						</Box>
-					</Link>
-				</ListItem>
+      {/* Language Selector en el Drawer */}
+      <Box sx={{ p: 2 }}>
+        <SelectLanguageButton isMobile={true} />
+      </Box>
 
-				<ListItem
-					disablePadding
-					sx={{ ":hover": { backgroundColor: "rgba(0, 0, 0, 0.1)" } }}
-				>
-					<Link href="/destiny">
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<Navigation
-								sx={{ color: Colors.first_blue, marginLeft: "15px" }}
-							/>
-							<ListItemButton
-								sx={{
-									textAlign: "left",
-									":hover": { backgroundColor: "rgba(0, 0, 0, 0.1)" },
-								}}
-							>
-								<ListItemText primary={t("navbar.destinations")} />
-							</ListItemButton>
-						</Box>
-					</Link>
-				</ListItem>
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.href} disablePadding>
+            <Link href={item.href} style={{ width: '100%' }}>
+              <ListItemButton
+                sx={{
+                  py: 1.5,
+                  borderRadius: 1,
+                  '&:hover': {
+                    backgroundColor: `${Colors.first_blue}15`,
+                  },
+                }}
+              >
+                <item.icon sx={{ color: Colors.first_blue, mr: 2 }} />
+                <ListItemText primary={t(item.label)} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
-				<ListItem
-					disablePadding
-					sx={{ ":hover": { backgroundColor: "rgba(0, 0, 0, 0.1)" } }}
-				>
-					<Link href="/contact_us">
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<PhoneCallback
-								sx={{ color: Colors.first_blue, marginLeft: "15px" }}
-							/>
-							<ListItemButton
-								sx={{
-									textAlign: "left",
-								}}
-							>
-								<ListItemText primary={t("navbar.contact")} />
-							</ListItemButton>
-						</Box>
-					</Link>
-				</ListItem>
-			</List>
-		</Box>
-	);
+  return (
+    <>
+      <AppBar
+        position='fixed'
+        sx={{
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        <Container maxWidth='xl'>
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <IconButton
+                onClick={handleDrawerToggle}
+                sx={{
+                  mr: 2,
+                  display: { sm: 'none' },
+                  color: Colors.first_blue,
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
 
-	const container =
-		window !== undefined ? () => window().document.body : undefined;
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <Link href='/'>
+                  <Image
+                    src={yatch_logo}
+                    alt='yatch logo company'
+                    width={200}
+                    height={50}
+                  />
+                </Link>
+              </Box>
+            </Box>
 
-	return (
-		<>
-			<AppBar
-				component="nav"
-				sx={{
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: { xs: "space-between", sm: "space-around" },
-					alignItems: "center",
-					backgroundColor: Colors.white,
-				}}
-				elevation={5}
-			>
-				<Toolbar>
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						edge="start"
-						onClick={handleDrawerToggle}
-						sx={{ ml: 1, display: { sm: "none" } }}
-					>
-						<MenuIcon
-							sx={{
-								color: Colors.title,
-								width: "40px",
-								height: "40px",
-							}}
-						/>
-					</IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              {/* Desktop Navigation */}
+              <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
+                {navItems.map((item) => (
+                  <Link key={item.href} href={item.href}>
+                    <Button
+                      sx={{
+                        color: Colors.title,
+                        '&:hover': {
+                          backgroundColor: 'transparent',
+                          transform: 'translateY(-2px)',
+                        },
+                      }}
+                    >
+                      {t(item.label)}
+                    </Button>
+                  </Link>
+                ))}
+              </Box>
 
-					<Box
-						sx={{
-							display: { xs: "none", sm: "block" },
-							width: { sm: "180px" },
-						}}
-					>
-						<Link href="/">
-							<Image
-								src={yatch_logo}
-								alt="yatch logo company"
-								width={200}
-								height={50}
-								style={{ width: "200px", height: "50px" }}
-							/>
-						</Link>
-					</Box>
-				</Toolbar>
+              {/* Desktop Language Selector */}
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <SelectLanguageButton isMobile={false} />
+              </Box>
 
-				<Box
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-						marginRight: "10px",
-					}}
-				>
-					<Box>
-						<Language
-							sx={{
-								display: { xs: "block", sm: "none" },
-								marginRight: "10px",
-								width: "40px",
-								height: "40px",
-								color: Colors.first_blue,
-							}}
-						/>
-						<SelectLanguageButton />
-					</Box>
-				</Box>
-				<Box
-					sx={{
-						display: { xs: "none", sm: "block" },
-					}}
-				>
-					<Button
-						sx={{
-							color: Colors.title,
-							fontFamily: "Roboto",
-							fontWeight: "500",
-							fontSize: { sm: "12px", md: "14px", lg: "16px" },
-							marginRight: { sm: "10px", md: "30px" },
-							letterSpacing: 1.5,
-						}}
-					>
-						<motion.div
-							whileHover={{ translateY: -5 }}
-							transition={{ duration: 0.5 }}
-						>
-							<Link href="/">{t("navbar.home")}</Link>
-						</motion.div>
-					</Button>
+              {/* Mobile Logo */}
+              <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+                <Link href='/'>
+                  <Image src={yatch_logo} alt='logo' width={120} height={30} />
+                </Link>
+              </Box>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
 
-					<Button
-						sx={{
-							color: Colors.title,
-							fontFamily: "Roboto",
-							fontWeight: "550",
-							fontSize: { sm: "12px", md: "14px", lg: "16px" },
-							marginRight: { sm: "10px", md: "30px" },
-							letterSpacing: 1.5,
-						}}
-					>
-						<motion.div
-							whileHover={{ translateY: -5 }}
-							transition={{ duration: 0.5 }}
-						>
-							<Link href="/services">{t("navbar.services")}</Link>
-						</motion.div>
-					</Button>
-					<Button
-						sx={{
-							color: Colors.title,
-							fontFamily: "Roboto",
-							fontWeight: "550",
-							fontSize: { sm: "12px", md: "14px", lg: "16px" },
-							marginRight: { sm: "10px", md: "30px" },
-							letterSpacing: 1.5,
-						}}
-					>
-						<motion.div
-							whileHover={{ translateY: -5 }}
-							transition={{ duration: 0.5 }}
-						>
-							<Link href="/destiny">{t("navbar.destinations")}</Link>
-						</motion.div>
-					</Button>
-					<Button
-						sx={{
-							color: Colors.title,
-							fontFamily: "Roboto",
-							fontWeight: "550",
-							fontSize: { sm: "12px", md: "14px", lg: "16px" },
-							marginRight: { sm: "10px", md: "30px" },
-							letterSpacing: 1.5,
-						}}
-					>
-						<motion.div
-							whileHover={{ translateY: -5 }}
-							transition={{ duration: 0.5 }}
-						>
-							<Link href="/contact_us">{t("navbar.contact")}</Link>
-						</motion.div>
-					</Button>
-				</Box>
-			</AppBar>
-			<Box component="nav">
-				<Drawer
-					container={container}
-					variant="temporary"
-					open={mobileOpen}
-					onClose={handleDrawerToggle}
-					ModalProps={{
-						keepMounted: true, // Better open performance on mobile.
-					}}
-					sx={{
-						display: { xs: "block", sm: "none" },
-						"& .MuiDrawer-paper": {
-							boxSizing: "border-box",
-							width: drawerWidth,
-						},
-					}}
-				>
-					{drawer}
-				</Drawer>
-			</Box>
-		</>
-	);
-}
+      <Box component='nav'>
+        <Drawer
+          container={
+            window !== undefined ? () => window().document.body : undefined
+          }
+          variant='temporary'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: 280,
+            },
+          }}
+        >
+          {DrawerContent}
+        </Drawer>
+      </Box>
+    </>
+  );
+};
 
 DrawerAppBar.propTypes = {
-	window: PropTypes.func,
+  window: PropTypes.func,
 };
 
 export default DrawerAppBar;

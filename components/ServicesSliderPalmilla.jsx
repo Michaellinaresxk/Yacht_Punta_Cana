@@ -1,107 +1,185 @@
-import { Box, Paper, Typography } from "@mui/material";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
-import { Colors } from "../styles/theme";
-import { useTranslation } from "next-i18next";
+import { Box, Container, Typography, Paper } from '@mui/material';
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css';
+import { Colors } from '../styles/theme/index';
+import { useTranslation } from 'next-i18next';
+import { motion } from 'framer-motion';
+import { LocationOn } from '@mui/icons-material';
 
 const palmilla = [
-	"https://res.cloudinary.com/michaelxk-com/image/upload/v1643830113/cygnus%20yachts/pictures/destinations/pages/palmilla/DJI_0427_gxhvz1.jpg",
-
-	"https://res.cloudinary.com/michaelxk-com/image/upload/v1643830113/cygnus%20yachts/pictures/destinations/pages/palmilla/22_qy4xzg.jpg",
-
-	"https://res.cloudinary.com/michaelxk-com/image/upload/v1643828516/cygnus%20yachts/pictures/destinations/pages/palmilla/playa_palmilla_2_wg3rnl.jpg",
+  'https://res.cloudinary.com/michaelxk-com/image/upload/v1643830113/cygnus%20yachts/pictures/destinations/pages/palmilla/DJI_0427_gxhvz1.jpg',
+  'https://res.cloudinary.com/michaelxk-com/image/upload/v1643830113/cygnus%20yachts/pictures/destinations/pages/palmilla/22_qy4xzg.jpg',
+  'https://res.cloudinary.com/michaelxk-com/image/upload/v1643828516/cygnus%20yachts/pictures/destinations/pages/palmilla/playa_palmilla_2_wg3rnl.jpg',
 ];
 
 export const ServicesSliderPalmilla = () => {
-	const { t } = useTranslation();
-	return (
-		<>
-			<Paper
-				elevation={0}
-				sx={{
-					display: "flex",
-					flexDirection: { xs: "column", sm: "row" },
-					width: "90%",
-					marginLeft: "auto",
-					marginRight: "auto",
-					marginTop: "100px",
-				}}
-			>
-				<Box
-					sx={{
-						width: {
-							xs: "90%",
-							sm: "50%",
-						},
+  const { t } = useTranslation();
 
-						marginLeft: {
-							xs: "auto",
-						},
-						marginRight: {
-							xs: "auto",
-						},
-					}}
-				>
-					<Slide>
-						<Box className="each-slide-effect" component="div">
-							<Box sx={{ backgroundImage: `url(${palmilla[0]})` }}>
-								{/* <Typography
-									color={Colors.blur_blue}
-									sx={{ fontSize: " clamp(1.1em, 3vw, 1.8em)" }}
-								>
-									Palmilla
-								</Typography> */}
-							</Box>
-						</Box>
-						<Box className="each-slide-effect" component="div">
-							<Box sx={{ backgroundImage: `url(${palmilla[1]})` }}>
-								{/* <Typography>Palmilla</Typography> */}
-							</Box>
-						</Box>
-						<Box className="each-slide-effect" component="div">
-							<Box style={{ backgroundImage: `url(${palmilla[2]})` }}>
-								{/* <Typography>Palmilla</Typography> */}
-							</Box>
-						</Box>
-					</Slide>
-				</Box>
+  const sliderProperties = {
+    duration: 3000,
+    transitionDuration: 500,
+    infinite: true,
+    indicators: true,
+    arrows: true,
+    pauseOnHover: true,
+    scale: 0.4,
+    indicators: (i) => (
+      <div
+        style={{
+          width: '12px',
+          height: '12px',
+          margin: '0 8px',
+          background: i ? 'rgba(255,255,255,0.5)' : Colors.first_blue,
+          borderRadius: '50%',
+          display: 'inline-block',
+          transition: 'all 0.3s ease',
+        }}
+      />
+    ),
+  };
 
-				<Box
-					sx={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						backgroundColor: "white",
-						width: {
-							xs: "90%",
-							sm: "50%",
-						},
+  return (
+    <Container maxWidth='lg' sx={{ py: 8 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Paper
+          elevation={0}
+          sx={{
+            borderRadius: '24px',
+            overflow: 'hidden',
+            background: 'linear-gradient(145deg, #ffffff, #f5f7fa)',
+            position: 'relative',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              minHeight: '600px',
+            }}
+          >
+            {/* Slider Section */}
+            <Box
+              sx={{
+                flex: 1,
+                position: 'relative',
+                overflow: 'hidden',
+                '& .react-slideshow-container': {
+                  height: '100%',
+                },
+                '& .each-slide-effect > div': {
+                  height: { xs: '400px', md: '600px' },
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                },
+                '& .react-slideshow-container .nav': {
+                  backgroundColor: 'rgba(255,255,255,0.8)',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: Colors.first_blue,
+                  margin: '0 20px',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: Colors.first_blue,
+                    color: 'white',
+                  },
+                },
+              }}
+            >
+              <Slide {...sliderProperties}>
+                {palmilla.map((url, index) => (
+                  <Box key={index} className='each-slide-effect'>
+                    <Box
+                      sx={{
+                        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%), url(${url})`,
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Slide>
+            </Box>
 
-						marginLeft: {
-							xs: "auto",
-						},
-						marginRight: {
-							xs: "auto",
-						},
-					}}
-				>
-					<Box
-						sx={{
-							width: "90%",
-							paddingBottom: "20px",
-							marginLeft: "auto",
-							marginRight: "auto",
-							marginTop: "20px",
-							textAlign: "justify",
-						}}
-					>
-						<Typography variant="h4">Palmilla Beach</Typography>
-						<Typography sx={{ marginTop: "5px" }}>
-							{t("destinations.palmilla-description")}
-						</Typography>
-					</Box>
-				</Box>
-			</Paper>
-		</>
-	);
+            {/* Content Section */}
+            <Box
+              sx={{
+                flex: 1,
+                p: { xs: 3, md: 5 },
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  mb: 3,
+                }}
+              >
+                <LocationOn sx={{ color: Colors.first_blue, fontSize: 28 }} />
+                <Typography
+                  variant='h4'
+                  sx={{
+                    fontWeight: 600,
+                    background: `linear-gradient(45deg, ${Colors.first_blue}, ${Colors.soft_blue})`,
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Palmilla Beach
+                </Typography>
+              </Box>
+
+              <Typography
+                variant='body1'
+                sx={{
+                  color: 'text.secondary',
+                  lineHeight: 1.8,
+                  mb: 4,
+                  textAlign: 'justify',
+                }}
+              >
+                {t('destinations.palmilla-description')}
+              </Typography>
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 2,
+                  flexWrap: 'wrap',
+                  mt: 'auto',
+                }}
+              >
+                {['Beach', 'Snorkeling', 'Swimming'].map((tag, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      px: 2,
+                      py: 0.5,
+                      borderRadius: '20px',
+                      backgroundColor: `${Colors.first_blue}15`,
+                      color: Colors.first_blue,
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {tag}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          </Box>
+        </Paper>
+      </motion.div>
+    </Container>
+  );
 };
