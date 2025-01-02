@@ -1,109 +1,103 @@
-import { Typography, Box } from '@mui/material';
-import { useTranslation } from 'next-i18next';
-import { motion } from 'framer-motion';
-import { Colors } from '../../styles/theme/index';
+import Head from 'next/head';
+import { ServicesHero } from '../components/hero/ServicesHero';
+import { Footer } from '../components/Footer';
+import { BookNowButton } from '../components/buttons/BookNowButton';
+import { OurServicesLogo } from '../components/OurServicesLogo';
+import { ServicesCard } from '../components/cards/ServicesCard';
+import { DestinationsContainer } from '../components/DestinationsContainer';
+import { boats } from '../database/boat_data';
+import { BoatsComponent } from '../components/BoatsComponent';
+import { MainTitleBoatServices } from '../components/MainTitleBoatServices';
+import { SupportBanner } from '../components/SupportBanner';
+import { FixedComponentImage } from '../components/FixedComponentImage';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { BoatServices } from '../components/BoatServices';
 
-export const DescriptionTiara43Boat = () => {
-  const { t } = useTranslation();
+const image1 =
+  'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124936/DJI_0355_ze3vtu.jpg';
 
-  // Función para verificar si la traducción existe y no está vacía
-  const hasParagraph = (key) => {
-    const translation = t(key);
-    return (
-      translation && translation.trim() !== key && translation.trim() !== ''
-    );
-  };
+const image2 =
+  'https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124942/opcion2_mfwnti.jpg';
 
+function Services({ boat_list }) {
   return (
-    <Box
-      sx={{
-        marginTop: '70px',
-        width: 'auto',
-        maxWidth: '90%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 2,
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Typography
-          variant='h4'
-          sx={{
-            fontWeight: 700,
-            background: `linear-gradient(45deg, ${Colors.first_blue}, ${Colors.soft_blue})`,
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            display: 'inline-block',
-            marginBottom: 2,
-          }}
-        >
-          {t('tiara-43.desc')}
-        </Typography>
-      </motion.div>
+    <>
+      <Head>
+        <title>
+          Luxury Yacht Charters in Punta Cana | Premium Boat Services
+        </title>
+        <meta
+          name='description'
+          content='Discover the ultimate luxury yacht experience in Punta Cana. Charter private yachts for unforgettable Caribbean adventures. Premium services, stunning views, and personalized trips await you!'
+        />
+        <meta
+          name='keywords'
+          content='yacht charter, Punta Cana, luxury boats, Caribbean cruise, private yacht rental'
+        />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-      {hasParagraph('tiara-43.p1') && (
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Typography
-            variant='body1'
-            sx={{
-              color: 'text.secondary',
-              lineHeight: 1.8,
-              fontSize: { xs: '1rem', sm: '1.1rem' },
-            }}
-          >
-            {t('tiara-43.p1')}
-          </Typography>
-        </motion.div>
-      )}
+        {/* Open Graph / Facebook */}
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content='http://localhost:3000/contact_us' />
+        <meta
+          property='og:title'
+          content='Luxury Yacht Charters in Punta Cana'
+        />
+        <meta
+          property='og:description'
+          content='Discover the ultimate luxury yacht experience in Punta Cana. Charter private yachts for unforgettable Caribbean adventures. Premium services, stunning views, and personalized trips await you!'
+        />
+        <meta
+          property='og:image'
+          content='https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124936/DJI_0355_ze3vtu.jpg'
+        />
 
-      {hasParagraph('tiara-43.p2') && (
-        <motion.div
-          initial={{ opacity: 0, y: 70 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <Typography
-            variant='body1'
-            sx={{
-              color: 'text.secondary',
-              lineHeight: 1.8,
-              fontSize: { xs: '1rem', sm: '1.1rem' },
-            }}
-          >
-            {t('tiara-43.p2')}
-          </Typography>
-        </motion.div>
-      )}
+        {/* Twitter */}
+        <meta property='twitter:card' content='summary_large_image' />
+        <meta
+          property='twitter:url'
+          content='http://localhost:3000/contact_us'
+        />
+        <meta
+          property='twitter:title'
+          content='Luxury Yacht Charters in Punta Cana'
+        />
+        <meta
+          property='twitter:description'
+          content='Discover the ultimate luxury yacht experience in Punta Cana. Charter private yachts for unforgettable Caribbean adventures. Premium services, stunning views, and personalized trips await you!'
+        />
+        <meta
+          property='twitter:image'
+          content='https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671124936/DJI_0355_ze3vtu.jpg'
+        />
 
-      {hasParagraph('tiara-43.p3') && (
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <Typography
-            variant='body1'
-            sx={{
-              color: 'text.secondary',
-              lineHeight: 1.8,
-              fontSize: { xs: '1rem', sm: '1.1rem' },
-            }}
-          >
-            {t('tiara-43.p3')}
-          </Typography>
-        </motion.div>
-      )}
-    </Box>
+        <link rel='canonical' href='http://localhost:3000/contact_us' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+
+      <ServicesHero />
+      <OurServicesLogo />
+      <ServicesCard />
+      <BoatServices />
+      <SupportBanner />
+      <FixedComponentImage image={image1} />
+      <MainTitleBoatServices />
+      <BoatsComponent data={boat_list} />
+      <BookNowButton />
+      <FixedComponentImage image={image2} />
+      <DestinationsContainer />
+      <Footer />
+    </>
   );
-};
+}
+
+export default Services;
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      boat_list: boats,
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+}
