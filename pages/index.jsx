@@ -84,7 +84,7 @@ export default function Home() {
       <VideoDesktop />
       <SupportBanner />
       <DestinationsContainer />
-      <BannerImageClip />
+      <BannerImageClip />  
       <Footer />
     </>
   );
