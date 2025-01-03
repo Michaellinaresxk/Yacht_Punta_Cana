@@ -26,13 +26,12 @@ export const BannerImageClip = () => {
           position: 'relative',
           background: 'linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%)',
           overflow: 'hidden',
-          py: { xs: 8, md: 0 },
-          minHeight: '700px',
+          py: { xs: 6, md: 8 },
           mt: 12,
         }}
         elevation={0}
       >
-        {/* Decorative elements */}
+        {/* Background decoration */}
         <Box
           sx={{
             position: 'absolute',
@@ -46,85 +45,61 @@ export const BannerImageClip = () => {
           }}
         />
 
-        <Container maxWidth='lg' sx={{ height: '100%' }}>
+        <Container maxWidth='lg'>
           <Box
             sx={{
               display: 'flex',
               flexDirection: { xs: 'column', md: 'row' },
-              alignItems: 'center',
+              alignItems: { xs: 'flex-start', md: 'center' },
               justifyContent: 'space-between',
-              gap: { xs: 6, md: 8 },
-              height: '100%',
-              py: { md: 8 },
+              gap: { xs: 4, md: 8 },
             }}
           >
-            <Box
-              component={motion.div}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              sx={{
-                display: { xs: 'none', md: 'block' },
-                flex: 1,
-                position: 'relative',
-                height: '600px',
-                width: '100%',
-                overflow: 'hidden',
-              }}
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '130%',
-                  height: '130%',
-                  backgroundImage: `url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671227427/DJI_0426_aisn2a.jpg)`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  // clipPath:
-                  //   'polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%)',
-                  transition: 'transform 0.3s ease-in-out',
-                  '&:hover': {
-                    transform: 'translate(-50%, -50%) scale(1.05)',
-                  },
-                  filter: 'brightness(1.1) contrast(1.1)',
-                }}
-              />
-            </Box>
+            {/* Title Section */}
             <Box
               component={motion.div}
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               sx={{
-                flex: 1,
-                maxWidth: { xs: '100%', md: '45%' },
+                flex: { xs: '1', md: '0.8' },
                 position: 'relative',
                 zIndex: 1,
               }}
             >
               <Typography
-                variant='h3'
+                variant='h2'
                 sx={{
-                  fontWeight: 700,
-                  mb: 3,
+                  fontWeight: 600,
                   background: `linear-gradient(135deg, ${Colors.first_blue} 0%, ${Colors.second_blue} 100%)`,
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   fontSize: { xs: '2.5rem', md: '3rem' },
+                  lineHeight: 1.2,
                 }}
               >
                 {t('owners.title')}
               </Typography>
+            </Box>
 
+            {/* Content Section */}
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              sx={{
+                flex: { xs: '1', md: '1.2' },
+                position: 'relative',
+                zIndex: 1,
+              }}
+            >
               <Typography
                 variant='h6'
                 sx={{
                   color: 'text.secondary',
-                  mb: 6,
+                  mb: 4,
                   lineHeight: 1.6,
                   fontWeight: 400,
                 }}
@@ -137,7 +112,7 @@ export const BannerImageClip = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
+                sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
               >
                 {listItems.map((item, index) => (
                   <motion.div
