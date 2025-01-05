@@ -75,7 +75,7 @@ export const DestinationsComponent = () => {
                       }}
                     />
                     <Box
-                      className='overlay'
+                      // className='overlay'
                       sx={{
                         position: 'absolute',
                         top: 0,

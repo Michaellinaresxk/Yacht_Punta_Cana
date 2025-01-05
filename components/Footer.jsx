@@ -6,7 +6,7 @@ import logo from '../assets/icons/logo-colorfull-1.png';
 import pay_image from '../assets/icons/pagos-con-paypal.png';
 import { Colors } from '../styles/theme';
 import { useTranslation } from 'next-i18next';
-import { Instagram, Facebook, WhatsApp } from '@mui/icons-material';
+import { Instagram, WhatsApp } from '@mui/icons-material';
 
 const navLinks = [
   { href: '/', label: 'navbar.home' },
@@ -17,7 +17,7 @@ const navLinks = [
 
 const socialLinks = [
   { Icon: Instagram, href: 'https://instagram.com/yachtpuntacana' },
-  { Icon: Facebook, href: 'https://facebook.com/yachtpuntacana' },
+  // { Icon: Facebook, href: 'https://facebook.com/yachtpuntacana' },
   { Icon: WhatsApp, href: 'https://wa.me/18292963529' },
 ];
 
@@ -44,7 +44,6 @@ export const Footer = () => {
           left: 0,
           right: 0,
           height: '4px',
-          background: `linear-gradient(90deg, ${Colors.first_blue}, ${Colors.soft_blue})`,
         }}
       />
 
@@ -100,7 +99,7 @@ export const Footer = () => {
                       bgcolor: `${Colors.first_blue}15`,
                       '&:hover': {
                         bgcolor: Colors.first_blue,
-                        color: 'white',
+                        color: '#fff',
                       },
                     }}
                   >
@@ -169,17 +168,17 @@ export const Footer = () => {
             </Typography>
             <Box
               sx={{
-                p: 3,
+                // p: 3,
                 bgcolor: 'white',
-                borderRadius: 2,
+                // borderRadius: 2,
                 width: 'fit-content',
               }}
             >
               <Image
                 alt='payment methods'
                 src={pay_image}
-                width={200}
-                height={50}
+                width={250}
+                height={100}
                 style={{
                   objectFit: 'contain',
                 }}

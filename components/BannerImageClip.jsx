@@ -55,34 +55,6 @@ export const BannerImageClip = () => {
               gap: { xs: 4, md: 8 },
             }}
           >
-            {/* Title Section */}
-            <Box
-              component={motion.div}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              sx={{
-                flex: { xs: '1', md: '0.8' },
-                position: 'relative',
-                zIndex: 1,
-              }}
-            >
-              <Typography
-                variant='h2'
-                sx={{
-                  fontWeight: 600,
-                  background: `linear-gradient(135deg, ${Colors.first_blue} 0%, ${Colors.second_blue} 100%)`,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontSize: { xs: '2.5rem', md: '3rem' },
-                  lineHeight: 1.2,
-                }}
-              >
-                {t('owners.title')}
-              </Typography>
-            </Box>
-
             {/* Content Section */}
             <Box
               component={motion.div}
@@ -158,6 +130,33 @@ export const BannerImageClip = () => {
                   </motion.div>
                 ))}
               </Box>
+            </Box>
+            {/* Title Section */}
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              sx={{
+                flex: { xs: '1', md: '0.8' },
+                position: 'relative',
+                zIndex: 1,
+              }}
+            >
+              <Typography
+                variant='h2'
+                sx={{
+                  fontWeight: 600,
+                  background: `linear-gradient(135deg, ${Colors.first_blue} 0%, ${Colors.second_blue} 100%)`,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontSize: { xs: '2.5rem', md: '3rem' },
+                  lineHeight: 1.2,
+                }}
+              >
+                {t('owners.title')}
+              </Typography>
             </Box>
           </Box>
         </Container>
