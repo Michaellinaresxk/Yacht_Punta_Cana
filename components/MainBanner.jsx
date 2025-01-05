@@ -2,7 +2,7 @@ import React from 'react';
 import { Paper, Typography, Box, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
-
+import Link from 'next/link';
 export const MainBanner = () => {
   const { t } = useTranslation();
 
@@ -33,7 +33,7 @@ export const MainBanner = () => {
           zIndex: 2,
           maxWidth: '900px',
           mx: { xs: '20px', sm: '40px', md: '60px', lg: '70px' },
-          marginTop: { xs: '-100px', sm: '-100px', md: '-150px' }, // Subido más arriba
+          marginTop: { xs: '-100px', sm: '-100px', md: '-250px' }, // Subido más arriba
           textAlign: { xs: 'center', md: 'left' },
         }}
       >
@@ -56,7 +56,7 @@ export const MainBanner = () => {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               display: 'inline-block',
-              mb: 2, // Margen inferior
+              mb: 1,
             }}
           >
             {t('mainBanner.title')}
@@ -112,27 +112,29 @@ export const MainBanner = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <Button
-            variant='contained'
-            sx={{
-              mt: { xs: 3, md: 4 },
-              px: { xs: 3, md: 4 },
-              py: { xs: 1.5, md: 2 },
-              fontSize: { xs: '1rem', md: '1.2rem' },
-              fontWeight: 600,
-              borderRadius: 3,
-              background: 'linear-gradient(45deg, #00b0ff, #0081cb)', // Gradiente azul
-              color: 'white',
-              boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                transform: 'translateY(-5px)',
-                boxShadow: '0 8px 15px rgba(0,0,0,0.3)',
-              },
-            }}
-          >
-            {t('button.luxuryyacht')}
-          </Button>
+          <Link href='/services'>
+            <Button
+              variant='contained'
+              sx={{
+                mt: { xs: 2, md: 2 },
+                px: { xs: 3, md: 4 },
+                py: { xs: 1.5, md: 2 },
+                fontSize: { xs: '1rem', md: '1.2rem' },
+                fontWeight: 600,
+                borderRadius: 3,
+                background: 'linear-gradient(45deg, #00b0ff, #0081cb)', // Gradiente azul
+                color: 'white',
+                boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 8px 15px rgba(0,0,0,0.3)',
+                },
+              }}
+            >
+              {t('button.luxuryyacht')}
+            </Button>
+          </Link>
         </motion.div>
       </Box>
     </Paper>

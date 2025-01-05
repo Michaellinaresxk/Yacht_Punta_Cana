@@ -1,9 +1,8 @@
+// components/FormComponent.jsx
 import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { useTranslation } from 'next-i18next';
 import {
-  Grid,
-  Container,
   Paper,
   Button,
   Typography,
@@ -12,7 +11,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Person, Email, Message } from '@mui/icons-material';
+import { Person, Email, Message, LocationOn, Phone } from '@mui/icons-material';
 import { Colors } from '../styles/theme';
 
 export const FormComponent = () => {
@@ -42,140 +41,142 @@ export const FormComponent = () => {
     sx: {
       '& .MuiOutlinedInput-root': {
         borderRadius: '12px',
-        backgroundColor: 'rgba(255,255,255,0.8)',
+        backgroundColor: 'rgba(255,255,255,0.9)',
+        transition: 'all 0.3s ease',
         '&:hover': {
-          backgroundColor: 'rgba(255,255,255,0.95)',
+          backgroundColor: 'rgba(255,255,255,1)',
+          transform: 'translateY(-2px)',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
         },
         '&.Mui-focused': {
-          backgroundColor: 'rgba(255,255,255,0.95)',
+          backgroundColor: 'rgba(255,255,255,1)',
+          transform: 'translateY(-2px)',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
         },
       },
     },
   };
 
   return (
-    <Container maxWidth='sm' sx={{ my: 8 }}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Paper
-          elevation={0}
-          sx={{
-            p: 4,
-            borderRadius: '24px',
-            background: `linear-gradient(135deg, ${Colors.first_blue}11 0%, ${Colors.first_blue}22 100%)`,
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.1)',
-          }}
-        >
-          <Typography
-            variant='h4'
-            sx={{
-              textAlign: 'center',
-              mb: 4,
-              fontWeight: 600,
-              background: `linear-gradient(45deg, ${Colors.first_blue}, ${Colors.second_blue})`,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            {t('contact-page.keepinTouch')}
+    <Paper
+      elevation={0}
+      sx={{
+        p: 4,
+        height: '100%',
+        borderRadius: '24px',
+        background: `linear-gradient(135deg, ${Colors.first_blue}08 0%, ${Colors.first_blue}15 100%)`,
+        backdropFilter: 'blur(10px)',
+        border: '1px solid rgba(255,255,255,0.1)',
+      }}
+    >
+      {/* Contact Info */}
+      <Box sx={{ mb: 4 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <LocationOn sx={{ color: Colors.first_blue, mr: 2 }} />
+          <Typography variant='body1' color='text.secondary'>
+            Punta Cana, Dominican Republic
           </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Phone sx={{ color: Colors.first_blue, mr: 2 }} />
+          <Typography variant='body1' color='text.secondary'>
+            +1 (809) 555-0123
+          </Typography>
+        </Box>
+      </Box>
 
-          <Box
-            component='form'
-            ref={form}
-            onSubmit={sendEmail}
+      {/* Form */}
+      <Box
+        component='form'
+        ref={form}
+        onSubmit={sendEmail}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
+        }}
+      >
+        <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+          <TextField
+            name='user_name'
+            fullWidth
+            label={t('contactForm.name')}
+            required
+            {...inputProps}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <Person sx={{ color: Colors.first_blue }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </motion.div>
+
+        <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+          <TextField
+            name='user_email'
+            fullWidth
+            label={t('contactForm.email')}
+            type='email'
+            required
+            {...inputProps}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <Email sx={{ color: Colors.first_blue }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </motion.div>
+
+        <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+          <TextField
+            name='user_message'
+            fullWidth
+            label={t('contactForm.message')}
+            required
+            multiline
+            rows={4}
+            {...inputProps}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <Message sx={{ color: Colors.first_blue }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </motion.div>
+
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <Button
+            variant='contained'
+            type='submit'
+            fullWidth
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
+              py: 2,
+              px: 4,
+              mt: 2,
+              backgroundColor: Colors.first_blue,
+              borderRadius: '12px',
+              textTransform: 'none',
+              fontSize: '1.1rem',
+              fontWeight: 500,
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 14px 0 rgba(0,118,255,0.39)',
+              '&:hover': {
+                backgroundColor: Colors.second_blue,
+                boxShadow: '0 6px 20px 0 rgba(0,118,255,0.39)',
+                transform: 'translateY(-2px)',
+              },
             }}
           >
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <TextField
-                name='user_name'
-                fullWidth
-                label={t('contactForm.name')}
-                required
-                {...inputProps}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <Person sx={{ color: Colors.first_blue }} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </motion.div>
-
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <TextField
-                name='user_email'
-                fullWidth
-                label={t('contactForm.email')}
-                type='email'
-                required
-                {...inputProps}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <Email sx={{ color: Colors.first_blue }} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </motion.div>
-
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <TextField
-                name='user_message'
-                fullWidth
-                label={t('contactForm.message')}
-                required
-                multiline
-                rows={5}
-                {...inputProps}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <Message sx={{ color: Colors.first_blue }} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </motion.div>
-
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant='contained'
-                type='submit'
-                fullWidth
-                sx={{
-                  py: 2,
-                  px: 4,
-                  mt: 2,
-                  backgroundColor: Colors.first_blue,
-                  borderRadius: '12px',
-                  textTransform: 'none',
-                  fontSize: '1.1rem',
-                  fontWeight: 500,
-                  boxShadow: '0 4px 14px 0 rgba(0,118,255,0.39)',
-                  '&:hover': {
-                    backgroundColor: Colors.second_blue,
-                    boxShadow: '0 6px 20px 0 rgba(0,118,255,0.39)',
-                  },
-                }}
-              >
-                {t('button.sendMessage')}
-              </Button>
-            </motion.div>
-          </Box>
-        </Paper>
-      </motion.div>
-    </Container>
+            {t('button.sendMessage')}
+          </Button>
+        </motion.div>
+      </Box>
+    </Paper>
   );
 };

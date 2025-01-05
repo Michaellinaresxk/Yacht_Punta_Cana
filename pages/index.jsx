@@ -10,6 +10,8 @@ import { BoatsComponent } from '../components/BoatsComponent';
 import { DestinationsContainer } from '../components/DestinationsContainer';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
+import { WelcomeBanner } from '../components/WelcomeBanner';
+import { ExperienceGallery } from '../components/ExperienceGallery';
 
 export default function Home() {
   const { locale } = useRouter();
@@ -79,12 +81,15 @@ export default function Home() {
       </Head>
       <MainBanner />
       <MainTitle />
+
       <BoatsComponent />
       <BookNowButton />
+      {/* <WelcomeBanner /> */}
       <VideoDesktop />
+      <ExperienceGallery />
       <SupportBanner />
       <DestinationsContainer />
-      <BannerImageClip />  
+      <BannerImageClip />
       <Footer />
     </>
   );
