@@ -27,7 +27,7 @@ export const WelcomeBanner = () => {
 
         <p className='description'>
           Where luxury meets adventure on the crystal-clear waters of the
-          Dominican Republic. With over 10 years of experience, we've mastered
+          Dominican Republic. With over 10 years of experience, we ve mastered
           the art of creating unforgettable maritime experiences. Our commitment
           to excellence ensures every voyage exceeds expectations, from intimate
           gatherings to grand celebrations.

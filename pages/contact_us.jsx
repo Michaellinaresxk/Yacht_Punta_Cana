@@ -3,7 +3,6 @@ import { ContactGroupIcons } from '../components/icons/ContactGroupIcons';
 import { Footer } from '../components/Footer';
 import { FormComponent } from '../components/FormComponent';
 import { NewMap } from '../components/map/NewMap';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Colors } from '../styles/theme';
@@ -69,6 +68,11 @@ function contact_us() {
 export default contact_us;
 
 export async function getStaticProps({ locale }) {
+  // Importación dinámica que solo ocurre en el servidor
+  const { serverSideTranslations } = await import(
+    'next-i18next/serverSideTranslations'
+  );
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),

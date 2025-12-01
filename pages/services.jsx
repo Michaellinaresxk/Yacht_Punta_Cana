@@ -10,7 +10,6 @@ import { BoatsComponent } from '../components/BoatsComponent';
 import { MainTitleBoatServices } from '../components/MainTitleBoatServices';
 import { SupportBanner } from '../components/SupportBanner';
 import { FixedComponentImage } from '../components/FixedComponentImage';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { BoatServices } from '../components/BoatServices';
 
 const image1 =
@@ -89,6 +88,11 @@ function Services({ boat_list }) {
 export default Services;
 
 export async function getStaticProps({ locale }) {
+  // Importación dinámica que solo ocurre en el servidor
+  const { serverSideTranslations } = await import(
+    'next-i18next/serverSideTranslations'
+  );
+
   return {
     props: {
       boat_list: boats,

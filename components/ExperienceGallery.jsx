@@ -170,7 +170,7 @@ export const ExperienceGallery = () => {
                 px: 2,
               }}
             >
-              Whether you're planning a romantic sunset cruise, a family
+              Whether you&apos;re planning a romantic sunset cruise, a family
               adventure, or a corporate event, our fleet offers the perfect
               vessel for your journey.
             </Typography>
@@ -222,9 +222,11 @@ export const ExperienceGallery = () => {
                 }}
                 onClick={() => handleOpen(image)}
               >
-                <img
+                <Image
                   src={image.src}
                   alt={image.alt}
+                  width={100}
+                  height={100}
                   loading='lazy'
                   style={{
                     width: '100%',
@@ -299,7 +301,7 @@ export const ExperienceGallery = () => {
                 justifyContent: 'center',
               }}
             >
-              <img
+              <Image
                 src={currentImage.src}
                 alt={currentImage.alt}
                 style={{

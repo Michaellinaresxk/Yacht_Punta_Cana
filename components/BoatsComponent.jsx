@@ -13,58 +13,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
-const image1 =
-  'https://res.cloudinary.com/michaelxk-com/image/upload/v1653911999/PC-YACHTS/yachts/cranchi-50/bg_dxwftv.jpg';
-const image2 =
-  'https://res.cloudinary.com/michaelxk-com/image/upload/v1654295753/PC-YACHTS/yachts/fairline-48-targa/bg1_gvvwgv.jpg';
-const image3 =
-  'https://res.cloudinary.com/michaelxk-com/image/upload/v1624143983/nuestra%20flota/aicon-fly-56/Aicon%20fly%2056.jpg';
-const image4 =
-  'https://res.cloudinary.com/michaelxk-com/image/upload/v1654298934/PC-YACHTS/yachts/tiara-39-open/3_mnzxmo.jpg';
-const image5 =
-  'https://res.cloudinary.com/michaelxk-com/image/upload/v1624144245/nuestra%20flota/meridian-42/Yate-5_wzfnuv.jpg';
-const image6 =
-  'https://res.cloudinary.com/michaelxk-com/image/upload/v1654297562/PC-YACHTS/yachts/Tiara-43-Sovran/1_gvy77c.jpg';
-
-const boats = [
-  {
-    image: image1,
-    title: 'Cranchi 50',
-    description: 'yacht-card.cranchi',
-    link: '/boats/cranchi_boat',
-  },
-  {
-    image: image2,
-    title: 'Fairline 48 Targa',
-    description: 'yacht-card.fairline',
-    link: '/boats/fairline_boat',
-  },
-  {
-    image: image3,
-    title: 'Icon Fly 60',
-    description: 'yacht-card.aiconfly-60',
-    link: '/boats/aiconfly_boat',
-  },
-  {
-    image: image4,
-    title: 'Tiara 39 Open',
-    description: 'yacht-card.tiara39',
-    link: '/boats/tiara39_boat',
-  },
-  {
-    image: image5,
-    title: 'Meridian',
-    description: 'yacht-card.meridian',
-    link: '/boats/meridian_boat',
-  },
-  {
-    image: image6,
-    title: 'Tiara 43 Sovran',
-    description: 'yacht-card.tiara43',
-    link: '/boats/tiara43_boat',
-  },
-];
+import { boats } from '../constants/boats';
 
 export const BoatsComponent = () => {
   const { t } = useTranslation();

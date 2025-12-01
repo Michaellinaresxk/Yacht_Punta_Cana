@@ -8,10 +8,10 @@ import { BookNowButton } from '../components/buttons/BookNowButton';
 import { VideoDesktop } from '../components/video/VideoDesktop';
 import { BoatsComponent } from '../components/BoatsComponent';
 import { DestinationsContainer } from '../components/DestinationsContainer';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { WelcomeBanner } from '../components/WelcomeBanner';
-import { ExperienceGallery } from '../components/ExperienceGallery';
+import { boats } from '../database/boat_data';
+// import { ExperienceGallery } from '../components/ExperienceGallery';
 
 export default function Home() {
   const { locale } = useRouter();
@@ -86,7 +86,7 @@ export default function Home() {
       <BookNowButton />
       {/* <WelcomeBanner /> */}
       <VideoDesktop />
-      <ExperienceGallery />
+      {/* <ExperienceGallery /> */}
       <SupportBanner />
       <DestinationsContainer />
       <BannerImageClip />
@@ -96,8 +96,14 @@ export default function Home() {
 }
 
 export async function getStaticProps({ locale }) {
+  // Importación dinámica que solo ocurre en el servidor
+  const { serverSideTranslations } = await import(
+    'next-i18next/serverSideTranslations'
+  );
+
   return {
     props: {
+      boat_list: boats,
       ...(await serverSideTranslations(locale, ['common'])),
     },
   };

@@ -8,7 +8,6 @@ import { ServicesSliderPalmilla } from '../components/ServicesSliderPalmilla';
 import { ServicesSliderPuntaCana } from '../components/ServicesSliderPuntaCana';
 import { ServicesSliderSantaCatalina } from '../components/ServicesSliderSantaCatalina';
 import { MainTitleBoatServices } from '../components/MainTitleBoatServices';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { boats } from '../database/boat_data';
 
 function Destiny({ boat_list }) {
@@ -81,6 +80,11 @@ function Destiny({ boat_list }) {
 export default Destiny;
 
 export async function getStaticProps({ locale }) {
+  // Importación dinámica que solo ocurre en el servidor
+  const { serverSideTranslations } = await import(
+    'next-i18next/serverSideTranslations'
+  );
+
   return {
     props: {
       boat_list: boats,
