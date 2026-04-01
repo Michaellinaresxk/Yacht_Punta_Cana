@@ -11,114 +11,109 @@ export const MainTitle = () => {
     <Container maxWidth='lg'>
       <Box
         component={motion.div}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          position: 'relative',
-          py: { xs: 8, md: 12 },
+          py: { xs: 8, md: 11 },
           px: 2,
+          position: 'relative',
         }}
       >
-        {/* Decorative elements */}
+        {/* Top vertical accent line */}
         <Box
           sx={{
-            position: 'absolute',
-            top: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
             width: '1px',
-            height: '60px',
-            background: `linear-gradient(to bottom, ${Colors.first_blue}00, ${Colors.first_blue})`,
+            height: '48px',
+            background: `linear-gradient(to bottom, transparent, ${Colors.first_blue})`,
+            mb: 3,
           }}
         />
 
+        {/* Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.6 }}
         >
-          <Typography
-            variant='subtitle1'
-            sx={{
-              fontSize: { xs: '1.1rem', md: '1.3rem' },
-              color: 'text.secondary',
-              fontWeight: 500,
-              mb: 2,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-            }}
-          >
-            <Sailing sx={{ color: Colors.first_blue }} />
-            {t('weAre.subtitle')}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2.5 }}>
+            <Sailing sx={{ color: Colors.soft_blue, fontSize: 18 }} />
+            <Typography
+              sx={{
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                color: Colors.soft_blue,
+              }}
+            >
+              {t('weAre.subtitle')}
+            </Typography>
+          </Box>
         </motion.div>
 
+        {/* Main heading */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.7 }}
         >
           <Typography
             variant='h1'
             sx={{
               fontWeight: 700,
-              fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
-              lineHeight: 1.2,
+              fontSize: { xs: '2.4rem', sm: '3.2rem', md: '4rem' },
+              lineHeight: 1.15,
               mb: 3,
-              background: `linear-gradient(135deg, ${Colors.first_blue} 0%, ${Colors.soft_blue} 100%)`,
+              background: `linear-gradient(135deg, ${Colors.off_white} 0%, ${Colors.soft_blue} 100%)`,
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 2px 10px rgba(0,0,0,0.05)',
-              position: 'relative',
+              letterSpacing: '-0.03em',
             }}
           >
             Yacht Punta Cana
           </Typography>
         </motion.div>
 
+        {/* Body text */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.7 }}
         >
           <Typography
             variant='h5'
             sx={{
-              maxWidth: '800px',
+              maxWidth: '720px',
               mx: 'auto',
-              color: 'text.secondary',
-              fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' },
-              lineHeight: 1.8,
+              color: Colors.text_muted,
+              fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' },
+              lineHeight: 1.85,
               fontWeight: 400,
-              position: 'relative',
-              '& strong': {
-                color: Colors.first_blue,
-                fontWeight: 600,
-              },
+              '& strong': { color: Colors.soft_blue, fontWeight: 600 },
             }}
           >
             {t('weAre.slogan')} <strong>{t('weAre.slogan1')}</strong>
           </Typography>
         </motion.div>
 
-        {/* Decorative wave */}
+        {/* Bottom horizontal accent */}
         <Box
           sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '80px',
-            height: '4px',
-            borderRadius: '2px',
-            background: `linear-gradient(90deg, ${Colors.first_blue}00, ${Colors.first_blue}, ${Colors.first_blue}00)`,
+            mt: 5,
+            width: '64px',
+            height: '2px',
+            borderRadius: '1px',
+            background: `linear-gradient(90deg, transparent, ${Colors.first_blue}, transparent)`,
           }}
         />
       </Box>

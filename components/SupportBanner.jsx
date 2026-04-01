@@ -1,5 +1,5 @@
-import { Typography, Paper, Button, Box, Container } from '@mui/material';
-import { WhatsApp, Email, Phone, ArrowForward } from '@mui/icons-material';
+import { Typography, Button, Box, Container } from '@mui/material';
+import { WhatsApp, Email, Phone } from '@mui/icons-material';
 import { Colors } from '../styles/theme';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
@@ -16,7 +16,7 @@ const contactOptions = [
     icon: Phone,
     text: 'button.callUs',
     link: 'tel:+18292963529',
-    color: '#0088cc',
+    color: Colors.soft_blue,
   },
   {
     icon: Email,
@@ -30,33 +30,45 @@ export const SupportBanner = () => {
   const { t } = useTranslation();
 
   return (
-    <Container maxWidth='xl'>
-      <Paper
+    <Container maxWidth='xl' sx={{ my: 8 }}>
+      <Box
         component={motion.div}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         sx={{
-          background: `linear-gradient(135deg, ${Colors.blur_blue} 0%, ${Colors.first_blue} 100%)`,
-          borderRadius: '24px',
-          overflow: 'hidden',
           position: 'relative',
-          my: 8,
+          borderRadius: '20px',
+          overflow: 'hidden',
+          border: '1px solid rgba(12, 113, 224, 0.2)',
+          background: `linear-gradient(135deg, ${Colors.navy_mid} 0%, ${Colors.navy} 100%)`,
         }}
-        elevation={0}
       >
-        {/* Decorative elements */}
+        {/* Animated blue glow top-right */}
         <Box
           sx={{
             position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '300px',
-            height: '300px',
-            background:
-              'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)',
+            top: -80,
+            right: -80,
+            width: 320,
+            height: 320,
             borderRadius: '50%',
-            transform: 'translate(50%, -50%)',
+            background: `radial-gradient(circle, rgba(12,113,224,0.18) 0%, transparent 70%)`,
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Faint left glow */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: -60,
+            left: -60,
+            width: 200,
+            height: 200,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, rgba(8,89,198,0.12) 0%, transparent 70%)`,
+            pointerEvents: 'none',
           }}
         />
 
@@ -65,44 +77,54 @@ export const SupportBanner = () => {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: { xs: 'flex-start', md: 'center' },
             p: { xs: 4, md: 6 },
             gap: 4,
+            position: 'relative',
+            zIndex: 1,
           }}
         >
-          <Box sx={{ maxWidth: '600px' }}>
-            <Typography
-              variant='h3'
-              component={motion.h3}
+          {/* Text */}
+          <Box sx={{ maxWidth: '560px' }}>
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              sx={{
-                color: '#fff',
-                fontWeight: 700,
-                mb: 2,
-                fontSize: { xs: '2rem', md: '2.5rem' },
-              }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15, duration: 0.6 }}
             >
-              {t('button.ContactUs')}
-            </Typography>
-            <Typography
-              variant='h6'
-              component={motion.p}
+              <Typography
+                variant='h3'
+                sx={{
+                  color: Colors.off_white,
+                  fontWeight: 700,
+                  mb: 1.5,
+                  fontSize: { xs: '1.8rem', md: '2.3rem' },
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                {t('button.ContactUs')}
+              </Typography>
+            </motion.div>
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              sx={{
-                color: 'rgba(255,255,255,0.9)',
-                fontWeight: 400,
-                lineHeight: 1.6,
-                mb: { xs: 3, md: 4 },
-              }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25, duration: 0.6 }}
             >
-              {t('contactQuote.title')}
-            </Typography>
+              <Typography
+                sx={{
+                  color: Colors.text_muted,
+                  fontWeight: 400,
+                  lineHeight: 1.7,
+                  fontSize: '1rem',
+                }}
+              >
+                {t('contactQuote.title')}
+              </Typography>
+            </motion.div>
           </Box>
 
+          {/* Buttons */}
           <Box
             sx={{
               display: 'flex',
@@ -114,57 +136,43 @@ export const SupportBanner = () => {
             {contactOptions.map((option, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <Link
-                  href={option.link}
-                  target='_blank'
-                  style={{ textDecoration: 'none' }}
-                >
+                <Link href={option.link} target='_blank' style={{ textDecoration: 'none' }}>
                   <Button
-                    variant='contained'
+                    startIcon={<option.icon sx={{ fontSize: '18px !important' }} />}
                     sx={{
-                      bgcolor: 'rgba(255,255,255,0.15)',
-                      backdropFilter: 'blur(10px)',
-                      py: 2,
+                      bgcolor: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      backdropFilter: 'blur(8px)',
+                      py: 1.5,
                       px: 3,
                       width: { xs: '100%', sm: 'auto' },
-                      borderRadius: '12px',
-                      transition: 'all 0.3s ease',
+                      borderRadius: '10px',
+                      color: Colors.off_white,
+                      fontWeight: 500,
+                      fontSize: '0.9rem',
+                      transition: 'all 0.25s ease',
                       '&:hover': {
-                        bgcolor: 'rgba(255,255,255,0.25)',
-                        transform: 'translateY(-2px)',
+                        bgcolor: 'rgba(12, 113, 224, 0.18)',
+                        borderColor: `rgba(12, 113, 224, 0.5)`,
+                        boxShadow: '0 4px 20px rgba(12, 113, 224, 0.2)',
                       },
                     }}
                   >
-                    <option.icon
-                      sx={{
-                        // color: option.color,
-                        fontSize: '24px',
-                        mr: 1,
-                      }}
-                    />
-                    <Typography
-                      sx={{
-                        color: 'white',
-                        fontWeight: 500,
-                        textTransform: 'none',
-                        fontSize: '1rem',
-                      }}
-                    >
-                      {t(option.text)}
-                    </Typography>
+                    {t(option.text)}
                   </Button>
                 </Link>
               </motion.div>
             ))}
           </Box>
         </Box>
-      </Paper>
+      </Box>
     </Container>
   );
 };

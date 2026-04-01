@@ -1,6 +1,5 @@
 import { ContactHero } from '../components/hero/ContactHero';
 import { ContactGroupIcons } from '../components/icons/ContactGroupIcons';
-import { Footer } from '../components/Footer';
 import { FormComponent } from '../components/FormComponent';
 import { NewMap } from '../components/map/NewMap';
 import { Container, Grid, Typography } from '@mui/material';
@@ -60,7 +59,6 @@ function contact_us() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }

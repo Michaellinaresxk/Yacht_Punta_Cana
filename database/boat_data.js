@@ -1,6 +1,7 @@
 export const boats = [
 	{
 		id: "4",
+		slug: "cranchi-50",
 		name: "Cranchi 50",
 		principalImage:
 			"https://res.cloudinary.com/michaelxk-com/image/upload/v1653911999/PC-YACHTS/yachts/cranchi-50/bg_dxwftv.jpg",
@@ -64,6 +65,7 @@ export const boats = [
 	},
 	{
 		id: "5",
+		slug: "fairline-48-targa",
 		name: "Fairline 48 Targa",
 		principalImage:
 			"https://res.cloudinary.com/michaelxk-com/image/upload/v1654295753/PC-YACHTS/yachts/fairline-48-targa/bg1_gvvwgv.jpg",
@@ -126,6 +128,7 @@ export const boats = [
 	},
 	{
 		id: "8",
+		slug: "icon-fly-60",
 		name: "Icon Fly 60",
 		principalImage:
 			"https://res.cloudinary.com/michaelxk-com/image/upload/v1624143983/nuestra%20flota/aicon-fly-56/Aicon%20fly%2056.jpg",
@@ -188,6 +191,7 @@ export const boats = [
 	},
 	{
 		id: "9",
+		slug: "tiara-43-sovran",
 		name: "Tiara 43 Sovran",
 		principalImage:
 			"https://res.cloudinary.com/michaelxk-com/image/upload/v1654297562/PC-YACHTS/yachts/Tiara-43-Sovran/1_gvy77c.jpg",
@@ -229,6 +233,7 @@ export const boats = [
 	},
 	{
 		id: "7",
+		slug: "tiara-39-open",
 		name: "Tiara 39 Open",
 		principalImage:
 			"https://res.cloudinary.com/michaelxk-com/image/upload/v1654298934/PC-YACHTS/yachts/tiara-39-open/3_mnzxmo.jpg",
@@ -288,6 +293,7 @@ export const boats = [
 	},
 	{
 		id: "6",
+		slug: "meridian",
 		name: "Meridian",
 		principalImage:
 			"https://res.cloudinary.com/michaelxk-com/image/upload/v1624144245/nuestra%20flota/meridian-42/Yate-5_wzfnuv.jpg",

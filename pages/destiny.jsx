@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { DestinationHero } from '../components/hero/DestinationHero';
-import { Footer } from '../components/Footer';
 import { BoatsComponent } from '../components/BoatsComponent';
 import { SupportBanner } from '../components/SupportBanner';
 import { BookNowButton } from '../components/buttons/BookNowButton';
@@ -72,7 +71,6 @@ function Destiny({ boat_list }) {
       <BoatsComponent data={boat_list} />
       <BookNowButton />
       <SupportBanner />
-      <Footer />
     </>
   );
 }
