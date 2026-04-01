@@ -1,103 +1,170 @@
-import React from 'react';
-import { Paper, Typography, Box, Button } from '@mui/material';
+import { Typography, Box, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Colors } from '../styles/theme';
+
+const textVariants = {
+  hidden: { opacity: 0, y: 36 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
 export const MainBanner = () => {
   const { t } = useTranslation();
 
   return (
-    <Paper
+    <Box
       sx={{
-        backgroundImage:
-          'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671125052/bg_rdqa9f.jpg)',
-        width: '100%',
-        height: { xs: '500px', sm: '600px', md: '750px', lg: '900px' },
-        backgroundPosition: {
-          xs: '50% 50%',
-          md: '70% 50%',
-        },
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
         position: 'relative',
+        width: '100%',
+        height: '100vh',
+        minHeight: '600px',
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
       }}
-      elevation={0}
     >
-      {/* Contenedor de texto */}
+      {/* ── Background image with Ken Burns zoom ── */}
+      <Box
+        component={motion.div}
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.08 }}
+        transition={{ duration: 18, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' }}
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage:
+            'url(https://res.cloudinary.com/freelancer2222222222222222/image/upload/v1671125052/bg_rdqa9f.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: { xs: '50% 50%', md: '70% 50%' },
+        }}
+      />
+
+      {/* ── Dark gradient overlay ── */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(105deg, rgba(6,16,30,0.88) 0%, rgba(6,16,30,0.6) 55%, rgba(6,16,30,0.3) 100%)',
+          zIndex: 1,
+        }}
+      />
+
+      {/* ── Bottom fade ── */}
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '160px',
+          background: 'linear-gradient(to top, #06101e, transparent)',
+          zIndex: 2,
+        }}
+      />
+
+      {/* ── Content ── */}
       <Box
         sx={{
           position: 'relative',
-          zIndex: 2,
-          maxWidth: '900px',
-          mx: { xs: '20px', sm: '40px', md: '60px', lg: '70px' },
-          marginTop: { xs: '-100px', sm: '-100px', md: '-250px' }, // Subido más arriba
-          textAlign: { xs: 'center', md: 'left' },
+          zIndex: 3,
+          maxWidth: '860px',
+          mx: { xs: '24px', sm: '48px', md: '72px', lg: '90px' },
         }}
       >
-        {/* Título principal con efecto de tipografía moderno */}
+        {/* Eyebrow label */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          custom={0}
+          variants={textVariants}
+          initial='hidden'
+          animate='visible'
+        >
+          <Box
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1.5,
+              mb: 3,
+            }}
+          >
+            <Box
+              sx={{
+                width: 40,
+                height: '1px',
+                background: Colors.soft_blue,
+                opacity: 0.7,
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '3.5px',
+                textTransform: 'uppercase',
+                color: Colors.soft_blue,
+              }}
+            >
+              Luxury Yacht Charter
+            </Typography>
+          </Box>
+        </motion.div>
+
+        {/* Main title */}
+        <motion.div
+          custom={0.15}
+          variants={textVariants}
+          initial='hidden'
+          animate='visible'
         >
           <Typography
             component='h1'
             sx={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)', // Tamaño de fuente responsive
+              fontSize: { xs: '2.6rem', sm: '3.4rem', md: '4.2rem', lg: '5rem' },
               fontWeight: 700,
-              color: 'white',
-              letterSpacing: '-0.05em', // Ajuste de tracking
-              lineHeight: 1.2,
-              // textShadow: '0 4px 6px rgba(0,0,0,0.5)', // Sombra más pronunciada
-              background: 'linear-gradient(45deg, #000, #00b0ff)', // Gradiente de color
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              display: 'inline-block',
-              mb: 1,
+              color: '#fff',
+              letterSpacing: '-0.03em',
+              lineHeight: 1.1,
+              mb: 1.5,
             }}
           >
             {t('mainBanner.title')}
           </Typography>
         </motion.div>
 
-        {/* Contenedor de subtítulo */}
+        {/* Subtitle with blue accent */}
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          custom={0.3}
+          variants={textVariants}
+          initial='hidden'
+          animate='visible'
         >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
-              alignItems: 'center',
-              gap: 1,
-            }}
-          >
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 0, sm: 1 }, mb: 3.5 }}>
             <Typography
               sx={{
-                fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-                fontWeight: 500,
-                color: 'white',
-                // textShadow: '0 3px 5px rgba(0,0,0,0.4)',
+                fontSize: { xs: '1.6rem', sm: '2rem', md: '2.5rem' },
+                fontWeight: 300,
+                color: 'rgba(220, 232, 248, 0.9)',
+                letterSpacing: '-0.01em',
                 lineHeight: 1.3,
               }}
             >
-              {t('mainBanner.subtitle')}
+              {t('mainBanner.subtitle')}&nbsp;
             </Typography>
             <Typography
               sx={{
-                fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+                fontSize: { xs: '1.6rem', sm: '2rem', md: '2.5rem' },
                 fontWeight: 700,
-                color: '#fff', // Color destacado
-                // textShadow: '0 3px 5px rgba(0,0,0,0.4)',
-                background: 'linear-gradient(45deg, #00b0ff, #0081cb)', // Gradiente azul
+                background: `linear-gradient(135deg, ${Colors.first_blue} 0%, ${Colors.soft_blue} 100%)`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                display: 'inline-block',
+                backgroundClip: 'text',
+                letterSpacing: '-0.01em',
                 lineHeight: 1.3,
               }}
             >
@@ -106,29 +173,31 @@ export const MainBanner = () => {
           </Box>
         </motion.div>
 
-        {/* Botón animado */}
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 70 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          custom={0.45}
+          variants={textVariants}
+          initial='hidden'
+          animate='visible'
         >
           <Link href='/services'>
             <Button
               variant='contained'
               sx={{
-                mt: { xs: 2, md: 2 },
-                px: { xs: 3, md: 4 },
-                py: { xs: 1.5, md: 2 },
-                fontSize: { xs: '1rem', md: '1.2rem' },
+                px: { xs: 3.5, md: 5 },
+                py: { xs: 1.5, md: 1.85 },
+                fontSize: { xs: '0.85rem', md: '0.95rem' },
                 fontWeight: 600,
-                borderRadius: 3,
-                background: 'linear-gradient(45deg, #00b0ff, #0081cb)', // Gradiente azul
-                color: 'white',
-                boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
+                borderRadius: '6px',
+                background: `linear-gradient(135deg, ${Colors.first_blue} 0%, ${Colors.second_blue} 100%)`,
+                color: '#fff',
+                boxShadow: `0 8px 32px rgba(12, 113, 224, 0.4)`,
+                letterSpacing: '0.5px',
                 transition: 'all 0.3s ease',
                 '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: '0 8px 15px rgba(0,0,0,0.3)',
+                  transform: 'translateY(-3px)',
+                  boxShadow: `0 12px 40px rgba(12, 113, 224, 0.55)`,
+                  background: `linear-gradient(135deg, ${Colors.second_blue} 0%, ${Colors.first_blue} 100%)`,
                 },
               }}
             >
@@ -137,6 +206,31 @@ export const MainBanner = () => {
           </Link>
         </motion.div>
       </Box>
-    </Paper>
+
+      {/* ── Scroll indicator ── */}
+      <Box
+        component={motion.div}
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        sx={{
+          position: 'absolute',
+          bottom: 36,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 0.5,
+          opacity: 0.5,
+          cursor: 'default',
+        }}
+      >
+        <Typography sx={{ fontSize: '10px', letterSpacing: '2.5px', textTransform: 'uppercase', color: '#fff' }}>
+          Scroll
+        </Typography>
+        <KeyboardArrowDownIcon sx={{ fontSize: 18, color: '#fff' }} />
+      </Box>
+    </Box>
   );
 };

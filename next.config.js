@@ -5,6 +5,7 @@
 const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
+	transpilePackages: ['react-responsive-masonry'],
 	// Definimos i18n directamente aquí
 	i18n: {
 		defaultLocale: 'en',

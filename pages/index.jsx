@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { MainBanner } from '../components/MainBanner';
-import { Footer } from '../components/Footer';
 import { SupportBanner } from '../components/SupportBanner';
 import { MainTitle } from '../components/MainTitle';
 import { BannerImageClip } from '../components/BannerImageClip';
@@ -90,7 +89,6 @@ export default function Home() {
       <SupportBanner />
       <DestinationsContainer />
       <BannerImageClip />
-      <Footer />
     </>
   );
 }

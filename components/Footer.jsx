@@ -17,7 +17,6 @@ const navLinks = [
 
 const socialLinks = [
   { Icon: Instagram, href: 'https://instagram.com/yachtpuntacana' },
-  // { Icon: Facebook, href: 'https://facebook.com/yachtpuntacana' },
   { Icon: WhatsApp, href: 'https://wa.me/18292963529' },
 ];
 
@@ -29,21 +28,23 @@ export const Footer = () => {
     <Box
       component='footer'
       sx={{
-        bgcolor: Colors.body,
+        bgcolor: Colors.navy,
+        borderTop: `1px solid rgba(12, 113, 224, 0.12)`,
         pt: 8,
         pb: 3,
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Decorative elements */}
+      {/* Subtle top accent line */}
       <Box
         sx={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
-          height: '4px',
+          height: '2px',
+          background: `linear-gradient(90deg, transparent, ${Colors.first_blue}, ${Colors.soft_blue}, transparent)`,
         }}
       />
 
@@ -51,59 +52,53 @@ export const Footer = () => {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              sm: 'repeat(2, 1fr)',
-              md: 'repeat(3, 1fr)',
-            },
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
             gap: 6,
-            mb: 8,
+            mb: 7,
           }}
         >
           {/* Company Info */}
           <Box>
             <Typography
-              variant='h6'
+              variant='overline'
               sx={{
                 color: Colors.soft_blue,
-                fontWeight: 600,
-                mb: 3,
+                fontWeight: 700,
+                letterSpacing: '2px',
+                mb: 2,
+                display: 'block',
               }}
             >
               Yacht Punta Cana
             </Typography>
             <Typography
               variant='body2'
-              sx={{
-                color: 'text.secondary',
-                lineHeight: 1.8,
-                mb: 3,
-              }}
+              sx={{ color: Colors.text_muted, lineHeight: 1.85, mb: 3 }}
             >
               {t('footer.description')}
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Box sx={{ display: 'flex', gap: 1.5 }}>
               {socialLinks.map(({ Icon, href }, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <motion.div key={index} whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
                   <IconButton
                     component='a'
                     href={href}
                     target='_blank'
                     rel='noopener noreferrer'
+                    size='small'
                     sx={{
-                      color: Colors.first_blue,
-                      bgcolor: `${Colors.first_blue}15`,
+                      color: Colors.soft_blue,
+                      bgcolor: 'rgba(16, 165, 245, 0.08)',
+                      border: '1px solid rgba(16, 165, 245, 0.18)',
                       '&:hover': {
                         bgcolor: Colors.first_blue,
+                        borderColor: Colors.first_blue,
                         color: '#fff',
                       },
+                      transition: 'all 0.25s ease',
                     }}
                   >
-                    <Icon />
+                    <Icon fontSize='small' />
                   </IconButton>
                 </motion.div>
               ))}
@@ -113,37 +108,37 @@ export const Footer = () => {
           {/* Quick Links */}
           <Box>
             <Typography
-              variant='h6'
+              variant='overline'
               sx={{
                 color: Colors.soft_blue,
-                fontWeight: 600,
-                mb: 3,
+                fontWeight: 700,
+                letterSpacing: '2px',
+                mb: 2,
+                display: 'block',
               }}
             >
               {t('footer.quicklinks')}
             </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-              }}
-            >
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} passHref>
-                  <motion.div
-                    whileHover={{ x: 6 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                <Link key={link.href} href={link.href}>
+                  <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.18 }}>
                     <Typography
                       component='span'
                       sx={{
-                        color: 'text.secondary',
-                        '&:hover': {
-                          color: Colors.first_blue,
-                        },
-                        transition: 'color 0.2s ease',
+                        color: Colors.text_muted,
+                        fontSize: '0.9rem',
                         cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1,
+                        '&:hover': { color: Colors.soft_blue },
+                        transition: 'color 0.2s ease',
+                        '&::before': {
+                          content: '"—"',
+                          color: `rgba(12, 113, 224, 0.35)`,
+                          fontSize: '0.7rem',
+                        },
                       }}
                     >
                       {t(link.label)}
@@ -157,62 +152,49 @@ export const Footer = () => {
           {/* Payment Methods */}
           <Box>
             <Typography
-              variant='h6'
+              variant='overline'
               sx={{
                 color: Colors.soft_blue,
-                fontWeight: 600,
-                mb: 3,
+                fontWeight: 700,
+                letterSpacing: '2px',
+                mb: 2,
+                display: 'block',
               }}
             >
               {t('footer.payment-methods')}
             </Typography>
             <Box
               sx={{
-                // p: 3,
-                bgcolor: 'white',
-                // borderRadius: 2,
+                p: 2,
+                borderRadius: '10px',
+                bgcolor: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.07)',
                 width: 'fit-content',
               }}
             >
               <Image
                 alt='payment methods'
                 src={pay_image}
-                width={250}
-                height={100}
-                style={{
-                  objectFit: 'contain',
-                }}
+                width={220}
+                height={85}
+                style={{ objectFit: 'contain' }}
               />
             </Box>
           </Box>
         </Box>
 
-        <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+        <Divider sx={{ borderColor: 'rgba(12, 113, 224, 0.1)' }} />
 
-        <Box
-          sx={{
-            mt: 3,
-            pt: 3,
-            textAlign: 'center',
-          }}
-        >
+        <Box sx={{ mt: 3, pt: 3, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
           <Image
             alt='website logo'
             src={logo}
-            width={200}
-            height={50}
-            style={{
-              objectFit: 'contain',
-              marginBottom: '1rem',
-            }}
+            width={160}
+            height={40}
+            style={{ objectFit: 'contain' }}
           />
-          <Typography
-            variant='body2'
-            sx={{
-              color: 'text.secondary',
-            }}
-          >
-            © {currentYear} Yacht Punta Cana. All rights reserved
+          <Typography variant='body2' sx={{ color: Colors.text_muted, fontSize: '0.8rem' }}>
+            © {currentYear} Yacht Punta Cana. All rights reserved.
           </Typography>
         </Box>
       </Container>

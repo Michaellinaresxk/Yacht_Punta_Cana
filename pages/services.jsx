@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { ServicesHero } from '../components/hero/ServicesHero';
-import { Footer } from '../components/Footer';
 import { BookNowButton } from '../components/buttons/BookNowButton';
 import { OurServicesLogo } from '../components/OurServicesLogo';
 import { ServicesCard } from '../components/cards/ServicesCard';
@@ -80,7 +79,6 @@ function Services({ boat_list }) {
       <BookNowButton />
       <FixedComponentImage image={image2} />
       <DestinationsContainer />
-      <Footer />
     </>
   );
 }
